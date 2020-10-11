@@ -25,7 +25,7 @@ Device ID: 2514
 Write FTDI FT232HL EEPROM data using [FT_Prog_v3.10.132.511](https://www.ftdichip.com/Support/Utilities.htm#FT_PROG)
 
 
-### Installing device drivers fot FT232HL
+### Installing device drivers for FT232HL
 
 Vendor ID: 0403
 Device ID: 6014
@@ -50,3 +50,10 @@ Write Device driver using [Zadig 2.5](https://zadig.akeo.ie/)
 
 Vendor ID: 04B4
 Device ID: 8613
+
+#### installing drivers
+
+[Driver Reference](https://community.cypress.com/docs/DOC-12366)
+
+- install driver inf from Driver.zip for Windows 10 x64 (or appropriate)
+  - device shows as `Cypress FX2LP No EEPROM Device` under USB Devices
