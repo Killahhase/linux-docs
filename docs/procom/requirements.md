@@ -12,6 +12,12 @@
   - USB Hub not able to deliver enough current to FTDI
 - ~~FT232H not visible on startup~~
   - Crystal line was shorted to VDD
+- VBUS_DET on USB Hub **must not** be connected to 5V directly, connect to 3V3 behind regulator instead!
+
+### USB Hub
+
+Vendor ID: 0424
+Device ID: 2514
 
 ### Writing configuration to the EEPROM
 
