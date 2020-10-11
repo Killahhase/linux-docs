@@ -10,10 +10,10 @@
 
 - EEPROM currently not detected using FT_PROG / FTDI not working
   - USB Hub not able to deliver enough current to FTDI
-  - ~~removed R24, R25 (battery charger protocol strap options) to no avail~~
+  - ~~removed R24, R25 (battery charger protocol strap options)~~ No Effect
 - ~~FT232H not visible on startup~~
-  - Crystal line was shorted to VDD
-- VBUS_DET on USB Hub **must not** be connected to 5V directly, connect to 3V3 behind regulator instead!
+  - ~~Crystal line shorted to VDD~~ Fixed
+- ~~VBUS_DET on USB Hub **must not** be connected to 5V directly, connect to 3V3 behind regulator instead!~~ Fixed
 
 ### USB Hub
 
