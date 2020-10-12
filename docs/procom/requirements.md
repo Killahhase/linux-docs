@@ -1,67 +1,66 @@
 [Back to index](./index.md)
 
-## Startup requirements
+# Startup requirements
 
-- Connect the Device via MicroUSB cable to Windows host PC. Green LED1 should glow.
-- Generic USB Hub device should install and device manager should show *one* new unknown devices 
-- FTDI USB Serial converter device should install
+- Connect the Device via MicroUSB cable to Windows host PC. Green LED1 should light up.
+- Generic USB Hub device should install and device manager should show *one* new unknown device
+- FTDI USB Serial converter device should install if any FTDI driver has already been installed once
 
-#### Problems:
+## USB Hub
 
-- EEPROM currently not detected using FT_PROG / FTDI not working
-  - USB Hub not able to deliver enough current to FTDI
-  - ~~removed R24, R25 (battery charger protocol strap options)~~ No Effect
-- ~~FT232H not visible on startup~~
-  - ~~Crystal line shorted to VDD~~ Fixed
-- ~~VBUS_DET on USB Hub **must not** be connected to 5V directly, connect to 3V3 behind regulator instead!~~ Fixed
+VID: `0x0424` PID: `0x2514`
 
-### USB Hub
+No need to do anything.
 
-Vendor ID: 0424
-Device ID: 2514
+## Installing device drivers for FT232HL
 
-### Writing configuration to the EEPROM
+VID: `0x0403` PID: `0x6014`
 
-Write FTDI FT232HL EEPROM data using [FT_Prog_v3.10.132.511](https://www.ftdichip.com/Support/Utilities.htm#FT_PROG)
+Write Device driver using Zadig:
 
+- Start up the Zadig utility
 
-### Installing device drivers for FT232HL
+- Select `Options/List All Devices`, then select the FTDI devices you want to communicate with. Its names depends on your hardware, i.e. the name stored in the FTDI EEPROM.
 
-Vendor ID: 0403
-Device ID: 6014
+- With FTDI devices with multiple channels, such as FT2232 (2 channels) and FT4232 (4 channels), you **must** install the driver for the composite parent, **not** for the individual interfaces. If you install the driver for each interface, each interface will be presented as a unique FTDI device and you may have difficulties to select a specific FTDI device port once the installation is completed. To make the composite parents to appear in the device list, uncheck the `Options/Ignore Hubs or Composite Parents` menu item.
 
-Write Device driver using [Zadig 2.5](https://zadig.akeo.ie/)
+- Be sure to select the parent device, i.e. the device name should not end with (Interface N), where N is the channel number. For example *Dual RS232-HS* represents the composite parent, while *Dual RS232-HS (Interface 0)* represents a single channel of the FTDI device. Always select the former.
 
-1. Start up the Zadig utility
+- Select `libusb-win32` (not `WinUSB`) in the driver list.
 
-2. Select `Options/List All Devices`, then select the FTDI devices you want to communicate with. Its names depends on your hardware, i.e. the name stored in the FTDI EEPROM.
+- Click on `Replace Driver`
 
-  - With FTDI devices with multiple channels, such as FT2232 (2 channels) and FT4232 (4 channels), you **must** install the driver for the composite parent, **not** for the individual interfaces. If you install the driver for each interface, each interface will be presented as a unique FTDI device and you may have difficulties to select a specific FTDI device port once the installation is completed. To make the composite parents to appear in the device list, uncheck the `Options/Ignore Hubs or Composite Parents` menu item.
+## Cypress Chip
 
-  - Be sure to select the parent device, i.e. the device name should not end with (Interface N), where N is the channel number.
+VID: `0x04B4` PID: `0x8613`
 
-    - for example *Dual RS232-HS* represents the composite parent, while *Dual RS232-HS (Interface 0)* represents a single channel of the FTDI device. Always select the former.
-
-3. Select `libusb-win32` (not `WinUSB`) in the driver list.
-
-4. Click on `Replace Driver`
-
-### Cypress Chip
-
-Vendor ID: 04B4
-Device ID: 8613
-
-#### installing drivers
-
-[Driver Reference](https://community.cypress.com/docs/DOC-12366)
+Install drivers:
 
 - install driver inf from Driver.zip for Windows 10 x64 (or appropriate)
   - device shows as `Cypress FX2LP No EEPROM Device` under USB Devices
 
-(TBD: Please extend)
-
-- using Cypress USB Control Center, flash EEPROM with `iic` file according to [this reference](https://community.cypress.com/docs/DOC-18867).
+- using Cypress USB Control Center, flash EEPROM with `iic` file.
   - new VID/PID will be `0x1d50` and `0x608d`
   - use Zadig to install `WinUSB` driver
   - device will be usable in sigrok as `sigrok FX2 LA (16ch)`
   - PB0..7 correspond to CH0..7 and PD0..7 to CH8..15
+
+## References
+
+[Cypress Driver](https://community.cypress.com/docs/DOC-12366)
+
+[Cypress USB Control Center (Part of SDK)](https://www.cypress.com/documentation/software-and-drivers/ez-usb-fx3-software-development-kit)
+
+[Cypress EEPROM flashing procedure](https://community.cypress.com/docs/DOC-18867)
+
+[Cypress CY7C68013A Datasheet](https://www.cypress.com/file/138911/download)
+
+[FTDI FT232H Datasheet](https://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_FT232H.pdf)
+
+[Microchip USB2514B Datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/00001692C.pdf)
+
+[Sigrok Pulseview](https://sigrok.org/wiki/PulseView)
+
+[Sigrok FW API](https://sigrok.org/gitweb/?p=libsigrok.git;a=blob;f=src\hardware\fx2lafw\api.c;h=04efcf3f6abba45d47dab0a2974a8f3c56c97e90;hb=HEAD)
+
+[Zadig 2.5](https://zadig.akeo.ie/)
