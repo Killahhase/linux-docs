@@ -57,3 +57,11 @@ Device ID: 8613
 
 - install driver inf from Driver.zip for Windows 10 x64 (or appropriate)
   - device shows as `Cypress FX2LP No EEPROM Device` under USB Devices
+
+(TBD: Please extend)
+
+- using Cypress USB Control Center, flash EEPROM with `iic` file according to [this reference](https://community.cypress.com/docs/DOC-18867).
+  - new VID/PID will be `0x1d50` and `0x608d`
+  - use Zadig to install `WinUSB` driver
+  - device will be usable in sigrok as `sigrok FX2 LA (16ch)`
+  - PB0..7 correspond to CH0..7 and PD0..7 to CH8..15
