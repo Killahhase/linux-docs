@@ -5,4 +5,5 @@
 This is the documentation for BanefulBunny ProtocolCompanion Standard Rev. 1.0
 
 - [Startup requirements](./requirements.md)
+- [Usage](./usage.md)
 - [Issues](./issues.md)
