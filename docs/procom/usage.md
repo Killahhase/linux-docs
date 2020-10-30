@@ -65,8 +65,10 @@ TBD
 
 ## Using PyFTDI
 
-TBD
+[PyFTDI documentation](https://eblot.github.io/pyftdi/)
 
-## Using OpenOCD
+## Using JTAG
 
-TBD
+To be able to use JTAG, it is currently needed to switch the drivers back to
+original FTDI drivers using FTDI driver installer. After this, the device can 
+be selected as FTDI-based JTAG device e.g. in TopJTAG Probe. 
