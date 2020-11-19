@@ -1,7 +1,13 @@
-## Linux-docs ToC
+... and several other stuff worth documenting.
 
-Linux commands are generally targeted at Ubuntu 18.04 unless otherwise specified.
+## Contents
+
+### Docs
 
 - [markdown docs](./markdown.md)
-- [general commands](./general.md)
+- [general Linux commands](./general.md)
+- [Code Snippets](./codesnippets/index.md)
+
+### Projects
+
 - [Protocol companion V1.0](./procom/index.md)
